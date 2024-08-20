@@ -1,6 +1,6 @@
 # Implementing an agent from scratch using an IBM Granite foundation model, LangChain, and watsonx.ai 
 
-This repository implements a weather query example application of an agent, including function calling based on the IBM Developer Blog Post [Create a LangChain AI Agent in Python using watsonx](https://developer.ibm.com/tutorials/awb-create-langchain-ai-agent-python-watsonx/). Therefor the endpoint `https://wttr.in/` is used as the resource for weather information.
+This repository implements a weather query example application of an agent, including function calling based on the IBM Developer Blog Post [Create a LangChain AI Agent in Python using watsonx](https://developer.ibm.com/tutorials/awb-create-langchain-ai-agent-python-watsonx/). Therefore, the endpoint https://wttr.in/ is used as the resource for the weather information.
 
 Related blog post: [Implementing LangChain AI Agent with WatsonxLLM for a Weather Queries application](https://wp.me/paelj4-2jw)
 

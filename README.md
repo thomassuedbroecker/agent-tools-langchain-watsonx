@@ -27,6 +27,8 @@ source venv/bin/activate
 python3 -m pip install -qU langchain-ibm
 python3 -m pip install -qU langchain
 python3 -m pip install langchain_core
+# show the agent chain as graph
+python3 -m pip install grandalf
 ```
 
 ### Step 3: Generate a `.env` file for the needed environment variables
@@ -59,7 +61,7 @@ export WATSONX_INSTANCE_ID=YOUR_WATSONX_INSTANCE_ID
 
 ## 2. Execution
 
-### Step 5: Run the example
+### Step 1: Run the example without graph
 
 ```sh
 cd code
@@ -149,4 +151,86 @@ Action:
 > Finished chain.
 16.d Response of the agent executor
 {'input': 'How to win a soccer game?', 'history': "Human: Which city is hotter today: LA or NY?\nAI: The hottest city is NY with a temperature of 14 degrees Celsius.\nHuman: How hot is it today in Berlin?\nAI: The temperature in Berlin is 10 degrees Celsius.\nHuman: What is the offical definition of the term weather?\nAI: Weather is a phenomenon that occurs in the atmosphere, primarily near the Earth's surface, and is characterized by a combination of temperature, humidity, precipitation, and wind.", 'output': 'The only way to win a soccer game is to score more goals than the opposing team.'}
+```
+
+### Step 2: Run the example and show the dependencies graph of the runnables
+
+```sh
+cd code
+bash example_agent_graph_invocation.sh
+```
+
+* Output
+
+```sh
+...
+6. Show the 'simple chain' dependencies graph
+
+  +-------------+    
+  | PromptInput |    
+  +-------------+    
+          *          
+          *          
+          *          
+ +----------------+  
+ | PromptTemplate |  
+ +----------------+  
+          *          
+          *          
+          *          
+   +------------+    
+   | WatsonxLLM |    
+   +------------+    
+          *          
+          *          
+          *          
++------------------+ 
+| WatsonxLLMOutput | 
++------------------+ 
+7. Invoke the simple chain by asking a question.
+....
+
+16. Show the 'agent chain' dependencies graph 
+
+  +----------------------------------------------+       
+  | Parallel<agent_scratchpad,chat_history>Input |       
+  +----------------------------------------------+       
+               ***        *         ***                  
+           ****          *             ****              
+         **              *                 **            
++--------+          +--------+          +-------------+  
+| Lambda |*         | Lambda |          | Passthrough |  
++--------+ ****     +--------+         *+-------------+  
+               ***       *          ***                  
+                  ****    *     ****                     
+                      **  *   **                         
+  +-----------------------------------------------+      
+  | Parallel<agent_scratchpad,chat_history>Output |      
+  +-----------------------------------------------+      
+                          *                              
+                          *                              
+                          *                              
+               +--------------------+                    
+               | ChatPromptTemplate |                    
+               +--------------------+                    
+                          *                              
+                          *                              
+                          *                              
+                   +------------+                        
+                   | WatsonxLLM |                        
+                   +------------+                        
+                          *                              
+                          *                              
+                          *                              
+              +-----------------------+                  
+              | JSONAgentOutputParser |                  
+              +-----------------------+                  
+                          *                              
+                          *                              
+                          *                              
+           +-----------------------------+               
+           | JSONAgentOutputParserOutput |               
+           +-----------------------------+               
+17. Create an agent executor
+...
 ```

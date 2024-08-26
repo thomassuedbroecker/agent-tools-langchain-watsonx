@@ -21,4 +21,4 @@ function get_watsonx_instance_id() {
 
 ##############################
 # Execution
-python3 agent_example.py
+python3 agent_graph_example.py

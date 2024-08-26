@@ -57,6 +57,7 @@ export WATSONX_MIN_NEW_TOKENS=1
 export WATSONX_MAX_NEW_TOKENS=300
 export WATSONX_LLM_NAME=ibm/granite-13b-chat-v2
 export WATSONX_INSTANCE_ID=YOUR_WATSONX_INSTANCE_ID
+export WATSONX_USERNAME="exampe_user@exampl.net"
 ```
 
 ## 2. Execution

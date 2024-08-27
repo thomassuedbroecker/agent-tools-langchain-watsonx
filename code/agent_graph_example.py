@@ -52,7 +52,7 @@ def weather_service(cities: List[str]) -> str:
      i = 0 
      for city in sorted_by_temperature:
         if (i == 0):
-             response_text =  f"The hottest city is {city['city']} with a temperature or {city['temperature']} degrees Celsius."
+             response_text =  f"The hottest city is {city['city']} with a temperature of {city['temperature']} degrees Celsius."
         else:
              response_text =  f"In the city {city['city']} the temperature is {city['temperature']} degrees Celsius."
         i = i + 1
